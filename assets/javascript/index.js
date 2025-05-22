@@ -119,3 +119,15 @@ cards.forEach((card) => {
     event.currentTarget.classList.remove('shadow-sm')
   })
 })
+
+const cartModal = document.getElementById('cartModal');
+if (cartModal) {
+  cartModal.addEventListener('shown.bs.modal', () => {
+    dataLayer.push({
+      event: 'view_cart',
+      cart: cartLS.list(),
+      totalPrice: cartLS.total(),
+      totalQuantity: cartLS.list().reduce((prev, curr) => prev + curr.quantity, 0)
+    });
+  });
+}
